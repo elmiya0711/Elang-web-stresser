@@ -2,7 +2,7 @@
 const axios = require('axios');
 const readline = require('readline');
 const fs = require('fs');
-const { HttpsProxyAgent } = require('https-proxy-agent');
+const agent = new HttpsProxyAgent(`http://${proxy}`);
 
 const rl = readline.createInterface({
   input: process.stdin,
