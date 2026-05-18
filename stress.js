@@ -22,7 +22,7 @@ rl.question('Enter GET URL: ', (urlGet) => {
           if (Date.now() >= endTime) clearInterval(interval);
           const randomReq = Math.random() < 0.5;
           const proxy = proxies[Math.floor(Math.random() * proxies.length)];
-          const agent = new HttpsProxyAgent(`http:             
+          const agent = new HttpsProxyAgent(`http:'            
           const config = { httpsAgent: agent };
 
           if (randomReq) {
