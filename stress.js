@@ -26,7 +26,7 @@ rl.question('Enter GET URL: ', (urlGet) => {
 
           const randomReq = Math.random() < 0.5;
           const selectedProxy = proxies[Math.floor(Math.random() * proxies.length)];
-          const agent = new HttpsProxyAgent('http://' + selectedProxy);                     
+          const agent = new HttpsProxyAgent('http:                     
           const config = { httpsAgent: agent };
 
           if (randomReq) {
@@ -38,11 +38,11 @@ rl.question('Enter GET URL: ', (urlGet) => {
           if (randomReq) {
             axios.get(urlGet, config)
               .then(() => console.log(`GET sent via ${selectedProxy}`))
-              .catch(e => console.error('Error:', e.message));
+              .catch(e => console.error('Error:', e.message, 'via', selectedProxy));
           } else {
             axios.post(urlPost, dataPost, config)
               .then(() => console.log(`POST sent via ${selectedProxy}`))
-              .catch(e => console.error('Error:', e.message));
+              .catch(e => console.error('Error:', e.message, 'via', selectedProxy));
           }
         }, 1000 / parseInt(reqPerSec));
       });
