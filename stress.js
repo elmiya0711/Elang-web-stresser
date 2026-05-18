@@ -26,7 +26,7 @@ rl.question('Enter GET URL: ', (urlGet) => {
 
           const randomReq = Math.random() < 0.5;
           const selectedProxy = proxies[Math.floor(Math.random() * proxies.length)];
-          const agent = new HttpsProxyAgent('http:                     
+          const agent = new HttpsProxyAgent('http://' + selectedProxy);                     
           const config = { httpsAgent: agent };
 
           if (randomReq) {
