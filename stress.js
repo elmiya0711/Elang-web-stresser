@@ -36,13 +36,13 @@ rl.question('Enter GET URL: ', (urlGet) => {
           const config = { httpsAgent: agent };
 
           if (randomReq) {
-            axios.get(urlGet, config)
-              .then(() => console.log(`GET sent via ${selectedProxy}`))
-              .catch(e => console.error('Error:', e.message, 'via', selectedProxy));
-          } else {
-            axios.post(urlPost, dataPost, config)
-              .then(() => console.log(`POST sent via ${selectedProxy}`))
-              .catch(e => console.error('Error:', e.message, 'via', selectedProxy));
+  axios.get(urlGet, config)
+    .then(() => console.log(`GET sent via ${selectedProxy}`))
+    .catch(e => console.error('Error:', e.message, 'via', selectedProxy));
+} else {
+  axios.post(urlPost, dataPost, config)
+    .then(() => console.log(`POST sent via ${selectedProxy}`))
+    .catch(e => console.error('Error:', e.message, 'via', selectedProxy));
           }
         }, 1000 / parseInt(reqPerSec));
       });
