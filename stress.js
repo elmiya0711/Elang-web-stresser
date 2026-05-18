@@ -21,10 +21,15 @@ rl.question('Enter GET URL: ', (urlGet) => {
         const interval = setInterval(() => {
           if (Date.now() >= endTime) clearInterval(interval);
           const randomReq = Math.random() < 0.5;
-          const proxy = proxies[Math.floor(Math.random() * proxies.length)];
-          const agent = new HttpsProxyAgent('http://' + proxy);
+          const proxies = fs.readFileSync('proxy.txt', 'utf8')
+            .split('\n')
+            .filter(Boolean)
+             .filter(p => p.match(/^\d+\.\d+\.\d+\.\d+:\d+$/)); // format IP:PORT
+      
+      
+             const agent = new HttpsProxyAgent('http://' + proxy);
             
-          const config = { httpsAgent: agent };
+            const config = { httpsAgent: agent };
 
           if (randomReq) {
             axios.get(urlGet, config)
