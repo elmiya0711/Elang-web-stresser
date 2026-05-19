@@ -24,7 +24,13 @@ rl.question('Enter GET URL: ', (urlGet) => {
           const proxy = proxies[Math.floor(Math.random() * proxies.length)];
           const agent = new HttpsProxyAgent(`http://${proxy}`);
 
-          const config = { httpsAgent: agent };
+          const config = {
+  httpsAgent: agent,
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/90.0.4430.212'
+  }
+};
+          
 
           if (randomReq) {
             axios.get(urlGet, config)
